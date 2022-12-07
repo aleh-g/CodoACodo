@@ -1,27 +1,51 @@
-const btnResumen = document.querySelector('.formulario');
+const resumen = {
+    nombre: '',
+    apellido: '',
+    email: '',
+    cantidad: '',
+    categoria: ''
+}
 
-const nombre =document.querySelector('#nombre');
-const apellido = document.querySelector('#apellido');
-const email = document.querySelector('#email');
 const cantidad = document.querySelector('#cantidad');
 const categoria = document.querySelector('#categoria');
-var valorTicket = 200;
 
-function calcularResumen(cantidad, categoria){
+let valorTicket = 200;
+let cantidadIngresada = '';
+let categoriaIngresada = '';
+
+cantidad.addEventListener('input', function(nuevaCantidad){
+    cantidadIngresada = nuevaCantidad.target.value;
+});
+
+categoria.addEventListener('input', function(nuevaCategoria){
+    categoriaIngresada = nuevaCategoria.target.value;
+});
+
+function calcular(cant, cat){
     let porcentaje = ""; 
     var resultado = "";
-    if (categoria == Estudiante){
+    if (cat == 1){
         porcentaje = 0.2;
-    } else if (categoria == Trainee){
+    } else if (cat == 2){
         porcentaje = 0.5;
-    } else if (categoria == Junior){
+    } else if (cat == 3){
         porcentaje = 0.85;
     } else {
         porcentaje = 1;
     }
-    resultado = valorTicket * cantidad * porcentaje; 
+
+    resultado = valorTicket * cant * porcentaje;
+    return resultado;
 }
 
-var mensaje = "Total a pagar: $ " + calcularResumen();
+function verResumen(){
+    const total = document.querySelector('.total');
+    var mensaje = "Total a pagar: $ " + calcular(cantidadIngresada, categoriaIngresada);
+    total.textContent = mensaje;  
+}
 
-btnResumen.addEventListener('click', function(mensaje){})
+function borrar(){
+    const total = document.querySelector('.total');
+    var mensaje = "";
+    total.textContent = mensaje;  
+}
